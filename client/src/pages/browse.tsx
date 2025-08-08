@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 
 export default function Browse() {
   const [search, setSearch] = useState("");
-  const [moodFilter, setMoodFilter] = useState("");
-  const [topicFilter, setTopicFilter] = useState("");
+  const [moodFilter, setMoodFilter] = useState("all");
+  const [topicFilter, setTopicFilter] = useState("all");
   const [sortBy, setSortBy] = useState("recent");
   const [page, setPage] = useState(1);
 
@@ -23,8 +23,8 @@ export default function Browse() {
     queryFn: async () => {
       const params = new URLSearchParams();
       if (search) params.append("search", search);
-      if (moodFilter) params.append("mood", moodFilter);
-      if (topicFilter) params.append("topic", topicFilter);
+      if (moodFilter && moodFilter !== "all") params.append("mood", moodFilter);
+      if (topicFilter && topicFilter !== "all") params.append("topic", topicFilter);
       params.append("sort", sortBy);
       params.append("page", page.toString());
       params.append("limit", "12");
@@ -73,7 +73,7 @@ export default function Browse() {
                     <SelectValue placeholder="All Moods" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Moods</SelectItem>
+                    <SelectItem value="all">All Moods</SelectItem>
                     {tags?.moodTags?.map((tag: any) => (
                       <SelectItem key={tag.id} value={tag.id}>{tag.name}</SelectItem>
                     ))}
@@ -85,7 +85,7 @@ export default function Browse() {
                     <SelectValue placeholder="All Topics" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Topics</SelectItem>
+                    <SelectItem value="all">All Topics</SelectItem>
                     {tags?.topicTags?.map((tag: any) => (
                       <SelectItem key={tag.id} value={tag.id}>{tag.name}</SelectItem>
                     ))}

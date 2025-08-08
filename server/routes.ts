@@ -120,9 +120,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { mood, topic, theme, sort, search, page = "1", limit = "12" } = req.query;
       
       const filters = {
-        moodTagId: mood as string,
-        topicTagId: topic as string,
-        themeId: theme as string,
+        moodTagId: mood ? mood as string : undefined,
+        topicTagId: topic ? topic as string : undefined,
+        themeId: theme ? theme as string : undefined,
         sort: sort as 'recent' | 'popular' | 'discussed',
         search: search as string,
         limit: parseInt(limit as string),
