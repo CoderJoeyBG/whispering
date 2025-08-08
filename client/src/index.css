@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(220, 43%, 11%);
+  --foreground: hsl(220, 9%, 65%);
+  --card: hsl(240, 20%, 92%);
+  --card-foreground: hsl(220, 43%, 11%);
+  --popover: hsl(220, 43%, 11%);
+  --popover-foreground: hsl(220, 9%, 65%);
+  --primary: hsl(8, 87%, 68%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(257, 100%, 83%);
+  --secondary-foreground: hsl(220, 43%, 11%);
+  --muted: hsl(220, 9%, 46%);
+  --muted-foreground: hsl(220, 9%, 65%);
+  --accent: hsl(240, 20%, 92%);
+  --accent-foreground: hsl(220, 43%, 11%);
+  --destructive: hsl(356, 91%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(257, 52%, 85%);
+  --input: hsl(240, 20%, 92%);
+  --ring: hsl(8, 87%, 68%);
+  --chart-1: hsl(8, 87%, 68%);
+  --chart-2: hsl(257, 100%, 83%);
+  --chart-3: hsl(220, 9%, 65%);
+  --chart-4: hsl(240, 20%, 92%);
+  --chart-5: hsl(220, 43%, 11%);
+  --midnight: hsl(220, 43%, 11%);
+  --coral: hsl(8, 87%, 68%);
+  --lavender: hsl(257, 100%, 83%);
+  --cool-gray: hsl(220, 9%, 65%);
+  --moonlight: hsl(240, 20%, 92%);
+  --sidebar: hsl(240, 20%, 92%);
+  --sidebar-foreground: hsl(220, 43%, 11%);
+  --sidebar-primary: hsl(8, 87%, 68%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(257, 52%, 85%);
+  --sidebar-accent-foreground: hsl(220, 43%, 11%);
+  --sidebar-border: hsl(257, 52%, 85%);
+  --sidebar-ring: hsl(8, 87%, 68%);
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 1.3rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00), 0px 1px 2px -1px hsl(8, 87%, 68%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00), 0px 1px 2px -1px hsl(8, 87%, 68%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00), 0px 2px 4px -1px hsl(8, 87%, 68%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00), 0px 4px 6px -1px hsl(8, 87%, 68%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00), 0px 8px 10px -1px hsl(8, 87%, 68%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(8, 87%, 68%, 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(220, 43%, 11%);
+  --foreground: hsl(220, 9%, 65%);
+  --card: hsl(220, 43%, 11%);
+  --card-foreground: hsl(220, 9%, 65%);
+  --popover: hsl(220, 43%, 11%);
+  --popover-foreground: hsl(220, 9%, 65%);
+  --primary: hsl(8, 87%, 68%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(257, 100%, 83%);
+  --secondary-foreground: hsl(220, 43%, 11%);
+  --muted: hsl(220, 9%, 46%);
+  --muted-foreground: hsl(220, 9%, 65%);
+  --accent: hsl(220, 43%, 11%);
+  --accent-foreground: hsl(257, 100%, 83%);
+  --destructive: hsl(356, 91%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(257, 52%, 20%);
+  --input: hsl(220, 43%, 15%);
+  --ring: hsl(8, 87%, 68%);
+  --chart-1: hsl(8, 87%, 68%);
+  --chart-2: hsl(257, 100%, 83%);
+  --chart-3: hsl(220, 9%, 65%);
+  --chart-4: hsl(240, 20%, 92%);
+  --chart-5: hsl(220, 43%, 11%);
+  --midnight: hsl(220, 43%, 11%);
+  --coral: hsl(8, 87%, 68%);
+  --lavender: hsl(257, 100%, 83%);
+  --cool-gray: hsl(220, 9%, 65%);
+  --moonlight: hsl(220, 43%, 15%);
+  --sidebar: hsl(220, 43%, 11%);
+  --sidebar-foreground: hsl(220, 9%, 65%);
+  --sidebar-primary: hsl(8, 87%, 68%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(220, 43%, 15%);
+  --sidebar-accent-foreground: hsl(257, 100%, 83%);
+  --sidebar-border: hsl(257, 52%, 20%);
+  --sidebar-ring: hsl(8, 87%, 68%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-midnight text-cool-gray;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+.whisper-card {
+  transition: all 0.3s ease;
+}
+
+.whisper-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 111, 97, 0.1);
+}
+
+.vote-btn {
+  transition: all 0.2s ease;
+}
+
+.vote-btn:hover {
+  transform: scale(1.1);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--lavender) 100%);
+}
+
+.bg-midnight {
+  background-color: var(--midnight);
+}
+
+.bg-coral {
+  background-color: var(--coral);
+}
+
+.bg-lavender {
+  background-color: var(--lavender);
+}
+
+.bg-cool-gray {
+  background-color: var(--cool-gray);
+}
+
+.bg-moonlight {
+  background-color: var(--moonlight);
+}
+
+.text-midnight {
+  color: var(--midnight);
+}
+
+.text-coral {
+  color: var(--coral);
+}
+
+.text-lavender {
+  color: var(--lavender);
+}
+
+.text-cool-gray {
+  color: var(--cool-gray);
+}
+
+.text-moonlight {
+  color: var(--moonlight);
+}
+
+.border-coral {
+  border-color: var(--coral);
+}
+
+.border-lavender {
+  border-color: var(--lavender);
+}
+
+.hover\:text-coral:hover {
+  color: var(--coral);
+}
+
+.hover\:text-lavender:hover {
+  color: var(--lavender);
+}
+
+.hover\:bg-coral:hover {
+  background-color: var(--coral);
+}
+
+.hover\:bg-lavender:hover {
+  background-color: var(--lavender);
+}
