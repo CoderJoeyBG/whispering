@@ -1,0 +1,955 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whispering Walls - Anonymous Stories, Shared Safely</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'midnight': '#121B2F',
+                        'coral': '#FF6F61',
+                        'lavender': '#B9A8FF',
+                        'cool-gray': '#A0A8B9',
+                        'moonlight': '#E6E8F7'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .whisper-card { transition: all 0.3s ease; }
+        .whisper-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 111, 97, 0.1); }
+        .vote-btn { transition: all 0.2s ease; }
+        .vote-btn:hover { transform: scale(1.1); }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-midnight text-cool-gray min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-midnight/95 backdrop-blur-sm border-b border-lavender/20 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-feather-alt text-coral text-2xl"></i>
+                    <span class="text-xl font-semibold text-white">Whispering Walls</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="hover:text-coral transition-colors duration-200">Browse</a>
+                    <a href="#" class="hover:text-coral transition-colors duration-200">Themes</a>
+                    <a href="#" class="hover:text-coral transition-colors duration-200">Map</a>
+                    <a href="#" class="hover:text-coral transition-colors duration-200">About</a>
+                    <button class="bg-gradient-to-r from-coral to-lavender text-white px-4 py-2 rounded-full hover:from-coral/80 hover:to-lavender/80 transition-all duration-200">
+                        Leave a Whisper
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-cool-gray hover:text-coral" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-4 pt-2 pb-4 space-y-2 bg-midnight/95 border-t border-lavender/20">
+                <a href="#" class="block py-2 hover:text-coral transition-colors duration-200">Browse</a>
+                <a href="#" class="block py-2 hover:text-coral transition-colors duration-200">Themes</a>
+                <a href="#" class="block py-2 hover:text-coral transition-colors duration-200">Map</a>
+                <a href="#" class="block py-2 hover:text-coral transition-colors duration-200">About</a>
+                <button class="w-full bg-gradient-to-r from-coral to-lavender text-white px-4 py-2 rounded-full mt-2">
+                    Leave a Whisper
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="min-h-screen" id="main-content">
+
+        <!-- Landing Page Hero -->
+        <section class="relative py-20 px-4" id="hero-section">
+            <!-- Subtle background pattern with scattered dots representing whispers -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-20 left-20 w-2 h-2 bg-lavender/30 rounded-full"></div>
+                <div class="absolute top-40 right-32 w-1 h-1 bg-coral/40 rounded-full"></div>
+                <div class="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-lavender/20 rounded-full"></div>
+                <div class="absolute top-60 left-1/2 w-1 h-1 bg-coral/30 rounded-full"></div>
+                <div class="absolute bottom-20 right-20 w-2 h-2 bg-lavender/25 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto text-center relative">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">
+                    Where Secrets Find
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-coral to-lavender">
+                        Their Voice
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-cool-gray mb-12 max-w-2xl mx-auto fade-in">
+                    Share your whispers anonymously. Connect through stories. 
+                    Find comfort in the collective human experience.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in">
+                    <button class="bg-gradient-to-r from-coral to-lavender text-white px-8 py-4 rounded-full text-lg font-medium hover:from-coral/80 hover:to-lavender/80 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-feather-alt mr-2"></i>
+                        Leave Your Whisper
+                    </button>
+                    <button class="border-2 border-lavender/50 text-lavender px-8 py-4 rounded-full text-lg font-medium hover:bg-lavender/10 transition-all duration-300">
+                        <i class="fas fa-headphones mr-2"></i>
+                        Hear the Whispers
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse Whispers Section -->
+        <section class="py-16 px-4" id="browse-section">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Recent Whispers</h2>
+                    <p class="text-cool-gray text-lg">Anonymous stories from hearts around the world</p>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="bg-moonlight/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-lavender/20">
+                    <div class="flex flex-col lg:flex-row gap-4 items-center">
+                        <!-- Search Bar -->
+                        <div class="flex-1 relative">
+                            <input type="text" placeholder="Search whispers..." 
+                                   class="w-full bg-moonlight/20 border border-lavender/30 rounded-xl px-4 py-3 pl-12 text-cool-gray placeholder-cool-gray/60 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20">
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-cool-gray/60"></i>
+                        </div>
+                        
+                        <!-- Filter Dropdowns -->
+                        <div class="flex flex-wrap gap-3">
+                            <select class="bg-moonlight/20 border border-lavender/30 rounded-xl px-4 py-3 text-cool-gray focus:outline-none focus:border-coral">
+                                <option>All Moods</option>
+                                <option>Hope</option>
+                                <option>Regret</option>
+                                <option>Fear</option>
+                                <option>Joy</option>
+                                <option>Sadness</option>
+                                <option>Love</option>
+                                <option>Anger</option>
+                            </select>
+                            
+                            <select class="bg-moonlight/20 border border-lavender/30 rounded-xl px-4 py-3 text-cool-gray focus:outline-none focus:border-coral">
+                                <option>All Topics</option>
+                                <option>Relationships</option>
+                                <option>Work</option>
+                                <option>Family</option>
+                                <option>Dreams</option>
+                                <option>Mental Health</option>
+                            </select>
+                            
+                            <select class="bg-moonlight/20 border border-lavender/30 rounded-xl px-4 py-3 text-cool-gray focus:outline-none focus:border-coral">
+                                <option>Recent</option>
+                                <option>Most Popular</option>
+                                <option>Most Discussed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Whisper Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- @MAP: whispers.map(whisper => ( -->
+                    
+                    <!-- Whisper Card 1 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Love</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Relationships</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">2h</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed" data-bind="whisper.text">
+                            "Sometimes I catch myself smiling at nothing, just thinking about how they scrunch their nose when they laugh. They don't know how much joy they bring to my ordinary days."
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral" data-event="click:handleUpvote">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span data-bind="whisper.upvotes">24</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender" data-event="click:handleDownvote">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span data-bind="whisper.downvotes">2</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral" data-event="click:viewWhisper">
+                                    <i class="fas fa-comment"></i>
+                                    <span data-bind="whisper.replyCount">7</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60" data-event="click:reportWhisper">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whisper Card 2 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Regret</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Work</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">4h</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed" data-bind="whisper.text">
+                            "I turned down my dream job three years ago because I was scared. That company is now worth millions. Fear is the thief of dreams, and I handed it the keys."
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>156</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>8</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-comment"></i>
+                                    <span>23</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whisper Card 3 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Hope</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Dreams</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">6h</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed">
+                            "I'm 45 and just started learning piano. My kids think I'm crazy, but every note feels like I'm discovering a part of myself I never knew existed."
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>89</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>1</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-comment"></i>
+                                    <span>12</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whisper Card 4 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Sadness</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Family</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">8h</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed">
+                            "Found my dad's old diary today. He wrote about being proud of me every single day, even during my rebellious teenage years. I wish I'd known before he left us."
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>203</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>3</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-comment"></i>
+                                    <span>34</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whisper Card 5 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Joy</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Mental Health</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">12h</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed">
+                            "Three months clean today. Walked past my old dealer's corner and felt... nothing. No craving, no fear. Just gratitude for the person I'm becoming."
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>445</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>0</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-comment"></i>
+                                    <span>67</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whisper Card 6 -->
+                    <div class="whisper-card bg-moonlight rounded-2xl p-6 border border-lavender/20 hover:border-coral/30 cursor-pointer" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex gap-2">
+                                <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-3 py-1 rounded-full text-sm font-medium">Fear</span>
+                                <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-3 py-1 rounded-full text-sm font-medium">Dreams</span>
+                            </div>
+                            <span class="text-cool-gray/60 text-sm">1d</span>
+                        </div>
+                        
+                        <p class="text-midnight mb-4 leading-relaxed">
+                            "Applied to art school at 28. Everyone says I'm too old, that I missed my chance. But what if I'm not too old? What if I'm exactly the right age to know what I want?"
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>78</span>
+                                </button>
+                                <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>2</span>
+                                </button>
+                                <button class="flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                    <i class="fas fa-comment"></i>
+                                    <span>15</span>
+                                </button>
+                            </div>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button class="bg-moonlight/20 border border-lavender/30 text-cool-gray px-8 py-3 rounded-xl hover:bg-moonlight/30 hover:border-coral/30 transition-all duration-200">
+                        Load More Whispers
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Whisper Form -->
+        <section class="py-16 px-4" id="submit-section" style="display: none;">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Share Your Whisper</h2>
+                    <p class="text-cool-gray text-lg">Your story matters. Share it safely and anonymously.</p>
+                </div>
+
+                <div class="bg-moonlight rounded-2xl p-8 border border-lavender/20">
+                    <form>
+                        <!-- Whisper Text Area -->
+                        <div class="mb-6">
+                            <label class="block text-cool-gray font-medium mb-3">Your Whisper</label>
+                            <textarea 
+                                class="w-full h-32 bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight placeholder-cool-gray/60 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 resize-none"
+                                placeholder="Share what's on your heart... (200 characters max)"
+                                maxlength="200"
+                                id="whisper-text"
+                                data-implementation="Character counter should update in real-time"
+                            ></textarea>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-sm text-cool-gray/60">Characters remaining:</span>
+                                <span class="text-sm font-medium text-coral" id="char-count">200</span>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-cool-gray font-medium mb-3">Mood (Optional)</label>
+                                <select class="w-full bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight focus:outline-none focus:border-coral">
+                                    <option value="">Choose a mood...</option>
+                                    <option value="hope">Hope</option>
+                                    <option value="regret">Regret</option>
+                                    <option value="fear">Fear</option>
+                                    <option value="joy">Joy</option>
+                                    <option value="sadness">Sadness</option>
+                                    <option value="love">Love</option>
+                                    <option value="anger">Anger</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-cool-gray font-medium mb-3">Topic (Optional)</label>
+                                <select class="w-full bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight focus:outline-none focus:border-coral">
+                                    <option value="">Choose a topic...</option>
+                                    <option value="relationships">Relationships</option>
+                                    <option value="work">Work</option>
+                                    <option value="family">Family</option>
+                                    <option value="dreams">Dreams</option>
+                                    <option value="mental-health">Mental Health</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Anonymous Options -->
+                        <div class="mb-6">
+                            <label class="block text-cool-gray font-medium mb-3">Nickname (Optional)</label>
+                            <input 
+                                type="text"
+                                class="w-full bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight placeholder-cool-gray/60 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20"
+                                placeholder="Choose a nickname or leave blank for full anonymity"
+                                maxlength="50"
+                            >
+                            <p class="text-sm text-cool-gray/60 mt-2">
+                                <i class="fas fa-shield-alt mr-1"></i>
+                                No registration required. Your identity remains completely anonymous.
+                            </p>
+                        </div>
+
+                        <!-- CAPTCHA Placeholder -->
+                        <div class="mb-6">
+                            <div class="bg-moonlight/30 border border-lavender/30 rounded-xl p-4 text-center">
+                                <i class="fas fa-robot text-2xl text-cool-gray/60 mb-2"></i>
+                                <p class="text-cool-gray/60">CAPTCHA verification would appear here</p>
+                                <!-- @FUNCTIONALITY: Integrate real CAPTCHA service like reCAPTCHA -->
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-coral to-lavender text-white py-4 rounded-xl font-medium text-lg hover:from-coral/80 hover:to-lavender/80 transition-all duration-300 transform hover:scale-[1.02]">
+                            <i class="fas fa-feather-alt mr-2"></i>
+                            Share Your Whisper
+                        </button>
+
+                        <p class="text-center text-sm text-cool-gray/60 mt-4">
+                            By sharing, you agree to our community guidelines of respect and kindness.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Whisper Thread View -->
+        <section class="py-16 px-4" id="thread-section" style="display: none;">
+            <!-- @COMPONENT: WhisperThread [whisper_id, replies] -->
+            <div class="max-w-4xl mx-auto">
+                <!-- Original Whisper -->
+                <div class="bg-moonlight rounded-2xl p-8 border border-lavender/20 mb-8">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex gap-3">
+                            <span class="bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-4 py-2 rounded-full font-medium">Love</span>
+                            <span class="bg-gradient-to-r from-lavender/20 to-lavender/10 text-lavender px-4 py-2 rounded-full font-medium">Relationships</span>
+                        </div>
+                        <span class="text-cool-gray/60">2 hours ago</span>
+                    </div>
+                    
+                    <p class="text-midnight text-lg leading-relaxed mb-6" data-bind="whisper.fullText">
+                        "Sometimes I catch myself smiling at nothing, just thinking about how they scrunch their nose when they laugh. They don't know how much joy they bring to my ordinary days. I want to tell them, but the words feel too small for this feeling."
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-6">
+                            <button class="vote-btn flex items-center gap-2 text-cool-gray/60 hover:text-coral bg-coral/10 px-4 py-2 rounded-xl">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>24</span>
+                            </button>
+                            <button class="vote-btn flex items-center gap-2 text-cool-gray/60 hover:text-lavender bg-lavender/10 px-4 py-2 rounded-xl">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>2</span>
+                            </button>
+                            <span class="flex items-center gap-2 text-cool-gray/60">
+                                <i class="fas fa-comment"></i>
+                                <span>7 replies</span>
+                            </span>
+                        </div>
+                        <button class="text-cool-gray/40 hover:text-coral/60 p-2">
+                            <i class="fas fa-flag"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reply Form -->
+                <div class="bg-moonlight/50 rounded-2xl p-6 border border-lavender/20 mb-8">
+                    <h3 class="text-white font-semibold mb-4">Add Your Response</h3>
+                    <form>
+                        <textarea 
+                            class="w-full h-24 bg-moonlight border border-lavender/30 rounded-xl px-4 py-3 text-midnight placeholder-cool-gray/60 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 resize-none mb-4"
+                            placeholder="Share your thoughts... (200 characters max)"
+                            maxlength="200"
+                        ></textarea>
+                        
+                        <div class="flex justify-between items-center">
+                            <input 
+                                type="text"
+                                class="bg-moonlight border border-lavender/30 rounded-xl px-4 py-2 text-midnight placeholder-cool-gray/60 focus:outline-none focus:border-coral w-40"
+                                placeholder="Nickname (optional)"
+                            >
+                            <button type="submit" class="bg-gradient-to-r from-coral to-lavender text-white px-6 py-2 rounded-xl hover:from-coral/80 hover:to-lavender/80 transition-all duration-200">
+                                Reply
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Replies -->
+                <div class="space-y-4">
+                    <!-- @MAP: replies.map(reply => ( -->
+                    
+                    <!-- Reply 1 -->
+                    <div class="bg-moonlight/30 rounded-xl p-6 border border-lavender/10 ml-8" data-mock="true">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-coral font-medium">Anonymous Wanderer</span>
+                            <span class="text-cool-gray/60 text-sm">1h</span>
+                        </div>
+                        <p class="text-midnight mb-4">I felt this in my soul. Sometimes the biggest love lives in the smallest moments. They probably see it in your eyes already. ❤️</p>
+                        <div class="flex items-center gap-4">
+                            <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>12</span>
+                            </button>
+                            <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>0</span>
+                            </button>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Reply 2 -->
+                    <div class="bg-moonlight/30 rounded-xl p-6 border border-lavender/10 ml-8" data-mock="true">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-lavender font-medium">Quiet Observer</span>
+                            <span class="text-cool-gray/60 text-sm">45m</span>
+                        </div>
+                        <p class="text-midnight mb-4">The way you describe them... it's beautiful. That nose scrunch thing is probably one of their unconscious charms that makes them uniquely them.</p>
+                        <div class="flex items-center gap-4">
+                            <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-coral">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>8</span>
+                            </button>
+                            <button class="vote-btn flex items-center gap-1 text-cool-gray/60 hover:text-lavender">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>0</span>
+                            </button>
+                            <button class="text-cool-gray/40 hover:text-coral/60">
+                                <i class="fas fa-flag text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+            <!-- @END_COMPONENT: WhisperThread -->
+        </section>
+
+        <!-- Admin Login -->
+        <section class="py-16 px-4" id="admin-login-section" style="display: none;">
+            <div class="max-w-md mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-4">Admin Access</h2>
+                    <p class="text-cool-gray">Secure login for site administrators</p>
+                </div>
+
+                <div class="bg-moonlight rounded-2xl p-8 border border-lavender/20">
+                    <form>
+                        <div class="mb-6">
+                            <label class="block text-cool-gray font-medium mb-3">Username</label>
+                            <input 
+                                type="text"
+                                class="w-full bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-cool-gray font-medium mb-3">Password</label>
+                            <input 
+                                type="password"
+                                class="w-full bg-moonlight/50 border border-lavender/30 rounded-xl px-4 py-3 text-midnight focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-coral to-lavender text-white py-3 rounded-xl font-medium hover:from-coral/80 hover:to-lavender/80 transition-all duration-200">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Secure Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section class="py-16 px-4" id="admin-dashboard-section" style="display: none;">
+            <!-- @COMPONENT: AdminDashboard [stats, flaggedContent, recentActions] -->
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-4">Admin Dashboard</h2>
+                    <p class="text-cool-gray">Monitor and moderate the Whispering Walls community</p>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-moonlight rounded-xl p-6 border border-lavender/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cool-gray/60 text-sm">Total Whispers</p>
+                                <p class="text-2xl font-bold text-midnight" data-bind="stats.totalWhispers">1,247</p>
+                            </div>
+                            <i class="fas fa-feather-alt text-coral text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-moonlight rounded-xl p-6 border border-lavender/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cool-gray/60 text-sm">Flagged Content</p>
+                                <p class="text-2xl font-bold text-coral" data-bind="stats.flaggedContent">12</p>
+                            </div>
+                            <i class="fas fa-flag text-coral text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-moonlight rounded-xl p-6 border border-lavender/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cool-gray/60 text-sm">Active Users</p>
+                                <p class="text-2xl font-bold text-midnight" data-bind="stats.activeUsers">89</p>
+                            </div>
+                            <i class="fas fa-users text-lavender text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-moonlight rounded-xl p-6 border border-lavender/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cool-gray/60 text-sm">Today's Whispers</p>
+                                <p class="text-2xl font-bold text-midnight" data-bind="stats.todayWhispers">43</p>
+                            </div>
+                            <i class="fas fa-calendar-day text-lavender text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Actions Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Moderation Queue -->
+                    <div class="bg-moonlight rounded-2xl p-6 border border-lavender/20">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-midnight">Flagged Content</h3>
+                            <span class="bg-coral text-white px-3 py-1 rounded-full text-sm">12 pending</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Flagged Item 1 -->
+                            <div class="bg-moonlight/50 rounded-xl p-4 border border-coral/20" data-mock="true">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-sm text-coral font-medium">Reported for: Inappropriate Content</span>
+                                    <span class="text-xs text-cool-gray/60">2h ago</span>
+                                </div>
+                                <p class="text-midnight text-sm mb-3 italic">"This content violates community guidelines..."</p>
+                                <div class="flex gap-2">
+                                    <button class="bg-green-500/20 text-green-600 px-3 py-1 rounded-lg text-sm hover:bg-green-500/30" data-event="click:approveContent">
+                                        Approve
+                                    </button>
+                                    <button class="bg-red-500/20 text-red-600 px-3 py-1 rounded-lg text-sm hover:bg-red-500/30" data-event="click:deleteContent">
+                                        Delete
+                                    </button>
+                                    <button class="bg-gray-500/20 text-gray-600 px-3 py-1 rounded-lg text-sm hover:bg-gray-500/30" data-event="click:banUser">
+                                        Ban User
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- More flagged items would be mapped here -->
+                        </div>
+                        
+                        <button class="w-full mt-4 text-coral hover:text-coral/80 font-medium">
+                            View All Flagged Content →
+                        </button>
+                    </div>
+
+                    <!-- Tag Management -->
+                    <div class="bg-moonlight rounded-2xl p-6 border border-lavender/20">
+                        <h3 class="text-xl font-semibold text-midnight mb-6">Tag Management</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-midnight mb-2">Mood Tags</h4>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-coral/20 text-coral px-3 py-1 rounded-full text-sm">Hope</span>
+                                    <span class="bg-coral/20 text-coral px-3 py-1 rounded-full text-sm">Regret</span>
+                                    <span class="bg-coral/20 text-coral px-3 py-1 rounded-full text-sm">Fear</span>
+                                    <span class="bg-coral/20 text-coral px-3 py-1 rounded-full text-sm">Joy</span>
+                                    <button class="border border-coral/30 text-coral px-3 py-1 rounded-full text-sm hover:bg-coral/10">
+                                        + Add Tag
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-midnight mb-2">Topic Tags</h4>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-lavender/20 text-lavender px-3 py-1 rounded-full text-sm">Relationships</span>
+                                    <span class="bg-lavender/20 text-lavender px-3 py-1 rounded-full text-sm">Work</span>
+                                    <span class="bg-lavender/20 text-lavender px-3 py-1 rounded-full text-sm">Family</span>
+                                    <button class="border border-lavender/30 text-lavender px-3 py-1 rounded-full text-sm hover:bg-lavender/10">
+                                        + Add Tag
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Theme Management -->
+                <div class="mt-8 bg-moonlight rounded-2xl p-6 border border-lavender/20">
+                    <h3 class="text-xl font-semibold text-midnight mb-6">Daily Theme Management</h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-midnight mb-3">Current Theme</h4>
+                            <div class="bg-moonlight/50 rounded-xl p-4 border border-lavender/20 mb-4">
+                                <h5 class="font-medium text-midnight mb-2" data-bind="currentTheme.title">"Whisper about a moment of unexpected kindness"</h5>
+                                <p class="text-cool-gray/60 text-sm" data-bind="currentTheme.description">Share a time when a stranger or friend showed you kindness when you needed it most.</p>
+                                <p class="text-xs text-cool-gray/60 mt-2">Active until tomorrow</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-midnight mb-3">Create New Theme</h4>
+                            <form class="space-y-3">
+                                <input 
+                                    type="text"
+                                    placeholder="Theme title..."
+                                    class="w-full bg-moonlight/50 border border-lavender/30 rounded-lg px-3 py-2 text-midnight text-sm focus:outline-none focus:border-coral"
+                                >
+                                <textarea 
+                                    placeholder="Theme description..."
+                                    class="w-full h-20 bg-moonlight/50 border border-lavender/30 rounded-lg px-3 py-2 text-midnight text-sm focus:outline-none focus:border-coral resize-none"
+                                ></textarea>
+                                <div class="flex gap-2">
+                                    <input 
+                                        type="date"
+                                        class="flex-1 bg-moonlight/50 border border-lavender/30 rounded-lg px-3 py-2 text-midnight text-sm focus:outline-none focus:border-coral"
+                                    >
+                                    <button type="submit" class="bg-gradient-to-r from-coral to-lavender text-white px-4 py-2 rounded-lg text-sm">
+                                        Create Theme
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: AdminDashboard -->
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-midnight/95 border-t border-lavender/20 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-feather-alt text-coral text-2xl"></i>
+                        <span class="text-xl font-semibold text-white">Whispering Walls</span>
+                    </div>
+                    <p class="text-cool-gray mb-4">
+                        A safe space for anonymous stories, creating connection through shared human experiences.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="text-cool-gray/60 hover:text-coral transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </button>
+                        <button class="text-cool-gray/60 hover:text-coral transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </button>
+                        <button class="text-cool-gray/60 hover:text-coral transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Explore</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Browse Whispers</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Daily Themes</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Global Map</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Guidelines</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-cool-gray hover:text-coral transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-lavender/20 mt-8 pt-8 text-center">
+                <p class="text-cool-gray/60">
+                    © 2024 Whispering Walls. Made with ❤️ for safe storytelling.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Character counter for whisper form
+            const whisperText = document.getElementById('whisper-text');
+            const charCount = document.getElementById('char-count');
+            
+            if (whisperText && charCount) {
+                whisperText.addEventListener('input', function() {
+                    const remaining = 200 - this.value.length;
+                    charCount.textContent = remaining;
+                    
+                    if (remaining < 20) {
+                        charCount.className = 'text-sm font-medium text-coral';
+                    } else {
+                        charCount.className = 'text-sm font-medium text-cool-gray';
+                    }
+                });
+            }
+
+            // Simulate page navigation (in a real app, this would be handled by React Router)
+            function showSection(sectionId) {
+                const sections = ['hero-section', 'browse-section', 'submit-section', 'thread-section', 'admin-login-section', 'admin-dashboard-section'];
+                sections.forEach(id => {
+                    const section = document.getElementById(id);
+                    if (section) {
+                        section.style.display = id === sectionId ? 'block' : 'none';
+                    }
+                });
+            }
+
+            // Navigation event listeners
+            document.addEventListener('click', function(e) {
+                const target = e.target.closest('button, a');
+                if (!target) return;
+
+                const text = target.textContent.trim();
+                
+                if (text.includes('Leave') && text.includes('Whisper')) {
+                    e.preventDefault();
+                    showSection('submit-section');
+                } else if (text.includes('Hear') || text.includes('Browse')) {
+                    e.preventDefault();
+                    showSection('browse-section');
+                } else if (target.closest('.whisper-card')) {
+                    e.preventDefault();
+                    showSection('thread-section');
+                }
+            });
+
+            // Show hero section by default
+            showSection('hero-section');
+
+            // Voting animations
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.vote-btn')) {
+                    const btn = e.target.closest('.vote-btn');
+                    btn.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                    }, 150);
+                }
+            });
+
+            // Add fade-in animation to whisper cards on load
+            const whisperCards = document.querySelectorAll('.whisper-card');
+            whisperCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, index * 100);
+            });
+
+            // TODO: Implement real functionality for:
+            // - API calls for whispers, voting, reporting
+            // - Form submissions with validation
+            // - Real-time updates for vote counts
+            // - Admin authentication and actions
+            // - CAPTCHA integration
+            // - Rate limiting
+            // - Database operations
+        })();
+    </script>
+</body>
+</html>
