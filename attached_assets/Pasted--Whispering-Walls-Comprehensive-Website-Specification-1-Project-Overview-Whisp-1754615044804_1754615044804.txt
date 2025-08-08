@@ -1,0 +1,247 @@
+# Whispering Walls — Comprehensive Website Specification
+
+---
+
+## 1. Project Overview
+
+**Whispering Walls** is an anonymous social platform for sharing short whispers — secrets, confessions, thoughts, or feelings — in a safe, poetic, and anonymous environment. It aims to foster empathy, emotional connection, and community through micro-storytelling without revealing identities.
+
+---
+
+## 2. Target Users & Roles
+
+| Role           | Permissions & Actions                                                                                         |
+|----------------|-------------------------------------------------------------------------------------------------------------|
+| Visitor/User   | Browse whispers, filter/search whispers, post anonymous whispers, reply, upvote/downvote, report content     |
+| Registered User (optional) | Same as Visitor, but with persistent nickname option (optional, no login required)                    |
+| Administrator  | Full moderation rights: manage users, moderate whispers/replies, manage tags, manage themes, site content, view analytics, manage admin users, view logs |
+
+---
+
+## 3. Core Features & Functionalities
+
+### 3.1 Anonymous Whisper Posting  
+- Max 200 characters per whisper.  
+- Optional mood and topic tagging (select from predefined lists).  
+- Option to add a nickname or post fully anonymously.  
+- CAPTCHA & rate limiting to prevent spam.  
+- Immediate posting with confirmation message.
+
+### 3.2 Whisper Browsing  
+- Main feed displays whispers as cards with:  
+  - Whisper text (truncated on feed)  
+  - Mood & topic tags  
+  - Number of replies, upvotes, downvotes  
+- Filters: Mood, Topic, Date (Recent), Popularity  
+- Pagination or infinite scroll for continuous browsing.  
+- Search bar for keyword filtering.
+
+### 3.3 Whisper Thread View  
+- Displays full whisper text with all replies below.  
+- Reply box with max 200 characters, same anonymity options.  
+- Upvote/downvote for whisper and replies.  
+- Report inappropriate whispers/replies (with reason).  
+- Replies shown chronologically with voting info.
+
+### 3.4 Voting System  
+- Upvote & downvote buttons on whispers & replies.  
+- Threshold-based hiding (“buried”) of content with many downvotes.  
+- Highly upvoted content appears highlighted or “resurrected.”  
+- Users can only vote once per whisper/reply per session.
+
+### 3.5 Flagging & Moderation Queue  
+- Users can report content, submitting reasons (e.g., spam, harassment).  
+- Admin panel includes flagged content queue for review.  
+- Automatic hiding of flagged content pending review.
+
+### 3.6 Mood & Topic Tag Management  
+- Predefined mood tags (e.g., Hope, Regret, Fear, Joy, Sadness, Love, Anger).  
+- Predefined topic tags (e.g., Relationships, Work, Family, Dreams, Mental Health).  
+- Admin can add/edit/delete tags dynamically.
+
+### 3.7 Daily Themes & Challenges  
+- Admin can set daily/weekly prompt or theme (e.g., “Whisper about a secret hope”).  
+- Whispers tagged with theme appear in a special collection.  
+- Theme archive for browsing past prompts and responses.
+
+### 3.8 Global Whisper Map *(Optional)*  
+- Interactive heatmap showing whisper density by region or country.  
+- Clicking a region filters whispers to that area on the browse page.  
+- Location data is coarse, no personal data stored/displayed.
+
+### 3.9 About, Guidelines & Contact  
+- Static pages for:  
+  - About: Mission, philosophy, site goals.  
+  - Guidelines: Posting rules, anonymity info, respectful behavior.  
+  - Contact: Feedback form with CAPTCHA.  
+- Easy navigation and footer links.
+
+---
+
+## 4. Pages and URL Structure
+
+| Page Name           | URL                  | Description & Features                                                         |
+|---------------------|----------------------|-------------------------------------------------------------------------------|
+| Landing Page        | `/`                  | Tagline, navigation, primary CTAs ("Hear a Whisper", "Leave Your Whisper")    |
+| Browse Whispers     | `/browse`            | Feed of whispers, filters, sorting, pagination/infinite scroll                |
+| Whisper Thread      | `/whisper/:id`       | Full whisper with replies, voting, reply form                                 |
+| Submit Whisper      | `/submit`            | Whisper submission form, character counter, CAPTCHA                          |
+| Global Map          | `/map`               | Interactive heatmap of whispers by region (optional)                         |
+| Daily Themes        | `/themes`            | Current theme, theme archive, themed whispers collection                      |
+| About               | `/about`             | Static page with site info                                                    |
+| Guidelines          | `/guidelines`        | Posting rules, community standards                                           |
+| Contact             | `/contact`           | Feedback form                                                                |
+| Admin Login         | `/admin/login`       | Secure login page for admins                                                 |
+| Admin Dashboard     | `/admin`             | Overview, stats, quick access to moderation features                         |
+| Admin User Management| `/admin/users`       | Ban/unban users, view IP hashes (hashed only)                               |
+| Admin Content Moderation | `/admin/moderation` | Queue of flagged whispers and replies, actions: approve/delete/ban          |
+| Admin Tag Management| `/admin/tags`        | Create/edit/delete mood and topic tags                                       |
+| Admin Themes        | `/admin/themes`      | Create/edit/delete daily themes and challenges                               |
+| Admin Site Content  | `/admin/site-content`| Edit About, Guidelines, FAQ                                                  |
+| Admin Logs          | `/admin/logs`        | View admin action logs, reports logs                                         |
+
+---
+
+## 5. User Flows
+
+### 5.1 Browse & Interact Flow  
+- User visits `/browse`  
+- Applies filters (Mood: Hope, Topic: Relationships)  
+- Scrolls feed, clicks a whisper card → opens `/whisper/:id`  
+- Reads original whisper and replies  
+- Upvotes the whisper, posts a reply anonymously  
+- Votes on replies, possibly reports inappropriate reply
+
+### 5.2 Post Whisper Flow  
+- User clicks "Leave Your Whisper" on `/` or visits `/submit`  
+- Types whisper (max 200 chars), selects optional mood/topic tags  
+- Optionally adds nickname or leaves anonymous  
+- Completes CAPTCHA  
+- Submits → confirmation message, whisper appears in `/browse`
+
+### 5.3 Admin Moderation Flow  
+- Admin logs in at `/admin/login`  
+- Reviews flagged whispers/replies at `/admin/moderation`  
+- Approves, deletes, or bans user/IP if abuse detected  
+- Edits mood/topic tags at `/admin/tags`  
+- Sets daily theme at `/admin/themes`  
+- Views analytics on `/admin` dashboard
+
+---
+
+## 6. Database Schema (Detailed)
+
+| Entity        | Fields & Types (Primary keys in bold)                                      | Description & Relations                            |
+|---------------|---------------------------------------------------------------------------|---------------------------------------------------|
+| **User**      | id (UUID), nickname (nullable string), banned (bool), ip_hash (string), created_at (timestamp) | Optional user nickname, IP stored hashed for admin use |
+| **Whisper**   | id (UUID), user_id (nullable FK), text (string, max 200), mood_tag_id (nullable FK), topic_tag_id (nullable FK), created_at (timestamp), upvotes (int), downvotes (int), buried (bool), flagged (bool) | Core whisper posts                                 |
+| **Reply**     | id (UUID), whisper_id (FK), user_id (nullable FK), text (string, max 200), created_at (timestamp), upvotes (int), downvotes (int), buried (bool), flagged (bool) | Replies to whispers                                |
+| **MoodTag**   | id (UUID), name (string), description (string)                            | Mood categories                                   |
+| **TopicTag**  | id (UUID), name (string), description (string)                            | Topic categories                                  |
+| **Theme**     | id (UUID), title (string), description (string), start_date (date), end_date (date) | Daily/weekly themes                                |
+| **Flag**      | id (UUID), content_type (enum: whisper, reply), content_id (UUID), user_ip_hash (string), reason (string), created_at (timestamp) | Reports of inappropriate content                   |
+| **AdminUser** | id (UUID), username (string), password_hash (string), created_at (timestamp), last_login (timestamp) | Site admins                                        |
+| **AdminAction**| id (UUID), admin_user_id (FK), action_type (string), target_type (string), target_id (UUID), timestamp (timestamp) | Logs of admin moderation actions                   |
+
+---
+
+## 7. API Endpoints (Example)
+
+| Method | Endpoint                  | Description                                   | Request Body / Params                            |
+|--------|---------------------------|-----------------------------------------------|-------------------------------------------------|
+| GET    | `/api/whispers`           | Get list of whispers with filters and pagination | Query: mood, topic, sort, page, limit            |
+| GET    | `/api/whispers/:id`       | Get single whisper and its replies             | Path param: whisper id                           |
+| POST   | `/api/whispers`           | Create new whisper                             | Body: text, mood_tag_id, topic_tag_id, nickname (optional) |
+| POST   | `/api/whispers/:id/replies`| Post reply to whisper                          | Body: text, nickname (optional)                  |
+| POST   | `/api/vote`               | Upvote/downvote a whisper or reply             | Body: content_type (whisper/reply), content_id, vote (up/down) |
+| POST   | `/api/report`             | Report content                                | Body: content_type, content_id, reason           |
+| GET    | `/api/tags`               | Get all mood and topic tags                    | —                                               |
+| GET    | `/api/themes/current`     | Get current daily/weekly theme                 | —                                               |
+| POST   | `/api/admin/login`        | Admin login                                   | Body: username, password                         |
+| GET    | `/api/admin/moderation`   | Get flagged content for review                 | Auth required                                   |
+| POST   | `/api/admin/moderation/action` | Take action on flagged content (approve/delete/ban) | Body: content_type, content_id, action           |
+| POST   | `/api/admin/tags`         | Create or edit tags                            | Body: tag_type (mood/topic), id (nullable), name, description |
+| POST   | `/api/admin/themes`       | Create or update themes                        | Body: id (nullable), title, description, start_date, end_date |
+
+---
+
+## 8. UI/UX Design Guidelines
+
+### 8.1 Color Palette  
+| Element           | Color Code | Description                     |
+|-------------------|------------|---------------------------------|
+| Background        | #121B2F    | Midnight Blue - calm, deep      |
+| Primary Accent    | #FF6F61    | Muted Coral - for buttons/highlights |
+| Secondary Accent  | #B9A8FF    | Soft Lavender - subtle highlights  |
+| Text Primary      | #A0A8B9    | Cool Gray - main text color     |
+| Card Background   | #E6E8F7    | Pale Moonlight - card backgrounds |
+
+### 8.2 Typography  
+- Font Family: Poppins or Inter (Google Fonts)  
+- Headings: Bold, larger size  
+- Body Text: Regular, comfortable reading size (16px+)  
+- Line height and spacing optimized for readability
+
+### 8.3 Animations & Interactions  
+- Smooth fade-in/out for whispers loading  
+- Button hover highlights  
+- Voting buttons animate briefly on click  
+- Responsive and accessible design (ARIA roles, keyboard navigation)
+
+---
+
+## 9. Security & Privacy Considerations
+
+- No user-identifiable data collected or stored beyond optional nickname (non-unique) and hashed IP for abuse management only.  
+- All IP addresses stored only as salted hashes; no plain IP storage.  
+- CAPTCHA on whisper and contact form submissions to reduce spam and bot abuse.  
+- Rate limiting per IP/session (e.g., max 5 whispers per hour).  
+- Content sanitized to prevent XSS, SQL injection, and other common web attacks.  
+- Admin routes protected with strong authentication (e.g., JWT + password hashing + optional 2FA).  
+- HTTPS mandatory for all communication.  
+- GDPR compliance for user privacy with clear policies.
+
+---
+
+## 10. Technical Stack Suggestions
+
+| Layer            | Technology Options                                                     |
+|------------------|----------------------------------------------------------------------|
+| Frontend         | React.js with Next.js (for SSR + SEO) or Vue.js                      |
+| Styling          | TailwindCSS or SCSS with BEM methodology                             |
+| Backend          | Node.js with Express or Fastify / Python with FastAPI                |
+| Database         | PostgreSQL or MongoDB                                                |
+| Authentication   | JWT tokens + bcrypt password hashing + optional 2FA                  |
+| Hosting          | Vercel (frontend), Heroku / AWS / DigitalOcean (backend & DB)       |
+| Caching          | Redis for rate limiting and caching popular whispers                  |
+| Monitoring       | Sentry for error monitoring, Google Analytics or Plausible for traffic |
+
+---
+
+## 11. Admin Panel Detailed Features
+
+- Dashboard with statistics: total whispers, daily whispers, flagged content, active themes  
+- Moderation queue with content preview, vote counts, user info (hashed IP only), flags count, timestamps  
+- Bulk actions for moderation (delete multiple whispers/replies)  
+- User management with ban/unban and view recent activity  
+- Tag management interface with real-time preview on browse page  
+- Theme scheduler with calendar view for planned themes  
+- Logs viewer filtering by date, admin user, action type
+
+---
+
+## 12. Additional Considerations & Future Extensions
+
+- User accounts with optional registration for persistent nicknames and whisper history  
+- Whisper editing or deletion within 5 minutes after posting  
+- Whisper bookmarking/favorites for registered users  
+- Whisper reactions (emojis) besides up/downvotes  
+- Whisper analytics for admins (most common moods, topics, peak posting times)  
+- Whisper moderation powered by AI for automated spam detection  
+- Mobile app companion or Progressive Web App (PWA) for offline mode
+
+---
+
+If you want, I can also help draft **wireframes** or **user stories** for the developer! Would that be useful?
+
+---
